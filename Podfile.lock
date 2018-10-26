@@ -1,0 +1,20 @@
+PODS:
+  - ActionKit (2.4.0)
+  - SteviaLayout (4.4.0)
+
+DEPENDENCIES:
+  - ActionKit (~> 2.4.0)
+  - SteviaLayout (~> 4.4.0)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - ActionKit
+    - SteviaLayout
+
+SPEC CHECKSUMS:
+  ActionKit: 1e1b696b6e1a54e7999d8c0f1d7176b2fee2fa4d
+  SteviaLayout: dd74d1abd127bbf0ce346ac9430441684fe427d0
+
+PODFILE CHECKSUM: 7bd6b5dd1f2684d970672d44eb5a650937daeef5
+
+COCOAPODS: 1.5.3
