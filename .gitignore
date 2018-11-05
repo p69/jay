@@ -67,3 +67,4 @@ fastlane/screenshots
 fastlane/test_output
 Swiftea.framework.zip
 .DS_Store
+Jay/Domain/Secrete.swift
