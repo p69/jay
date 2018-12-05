@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:Jay.Domain/Jay.Domain.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:../Swiftea/Swiftea.xcodeproj">
    </FileRef>
    <FileRef
