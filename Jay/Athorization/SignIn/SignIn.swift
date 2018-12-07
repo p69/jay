@@ -22,7 +22,7 @@ enum SignIn {
     case signInTapped, signUpTapped
   }
   
-  static func mkProgramWith<TView: SwifteaView>(view: TView, model: SignInModel? = nil)->Program<SignInModel, SignInMsg, ()>
+  static func mkProgramWith<TView: SwifteaView>(view: TView, model: SignInModel?)->Program<SignInModel, SignInMsg, ()>
     where TView.TModel == SignInModel, TView.TMsg == SignInMsg {
       return Program.mkSimple(
         initModel: { initModel(with: model) },

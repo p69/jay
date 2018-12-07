@@ -17,12 +17,15 @@ protocol SwifteaView where Self: UIView {
   func layout()
 }
 
-extension SwifteaView {
-  init() {
-    self.init(frame:CGRect.zero)
-    // This is only needed for live reload as injectionForXcode
-    // doesn't swizzle init methods.
-    // Get injectionForXcode here : http://johnholdsworth.com/injection.html
-    layout()
-  }
+protocol SwifteaViewController where Self: UIViewController {
+  associatedtype View: SwifteaView
+  associatedtype Model: Equatable
+  associatedtype Msg
+
+  typealias CreateView = ()->View
+  typealias CreateProgram = (View, Model?)->Program<Model, Msg, ()>
+
+  init(createView: @escaping CreateView, createProgram: @escaping CreateProgram)
 }
+
+

@@ -22,6 +22,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Bundle(path: "/Applications/InjectionX.app/Contents/Resources/iOSInjection.bundle")?.load()
     #endif
 
+    window = UIWindow(frame: UIScreen.main.bounds)
+
+    let signInVc = SignInViewController()
+
+    window?.rootViewController = signInVc
+    window?.makeKeyAndVisible()
+
+    UIApplication.shared.statusBarStyle = .lightContent
+
     return true
   }
 
