@@ -104,98 +104,32 @@ extension SignIn {
         signInBtn.centerHorizontally().width(>=200) ~ 50,
         50,
         bottomItemsStack.centerHorizontally()
-
       )
       signUpBtn.Left >= dontHaveAccountLabel.Right + 20.0
 
-
+      // Content
       emailField.placeholder = Placeholders.email.rawValue
       pwdField.placeholder = Placeholders.password.rawValue
-
-      // Styling 🎨
-
-      emailField.style(commonFieldStyle)
-      pwdField.style(commonFieldStyle).style { f in
-        f.isSecureTextEntry = true
-        f.returnKeyType = .done
-      }
-      signInBtn.style(signInBtnStyle)
-      signInLabel.style(headerStyle)
-      forgotPwdLabel.style(description2Style)
-      dontHaveAccountLabel.style(description2Style)
-      signUpBtn.style(linkBtnStyle)
-      emailValidationLabel.style(validationLabelStyle)
-      loginErrorLabel.style(errorLabelStyle)
-
-      // Content 🖋
       signInBtn.setTitle("Sign In", for: .normal)
       signInLabel.text = "Sign In"
       signInDescription.text = "Sign In to your account."
-      signInDescription.style(descriptionStyle)
       forgotPwdLabel.text = "Forgot passwrd?"
       dontHaveAccountLabel.text = "Don't have an account yet?"
-      signUpBtn.attributedText = NSMutableAttributedString(string: "Sign Up", attributes: [NSAttributedString.Key.underlineStyle : true])
-    }
+      signUpBtn.text = "Sign Up"
 
-    // Style can be extracted and applied kind of like css \o/
-    // but in pure Swift though!
-    func commonFieldStyle(_ f:UITextField) {
-      f.setLeftPaddingPoints(18.0)
-      f.layer.cornerRadius = 2.0
-      f.layer.backgroundColor = UIColor(rgba: 0x00000033).cgColor
-      f.font = UIFont.systemFont(ofSize: 20.0, weight: .regular)
-      f.textColor = UIColor.white
-      f.attributedPlaceholder =  NSAttributedString(
-        string: f.placeholder ?? "",
-        attributes: [NSAttributedString.Key.foregroundColor: UIColor(rgba:0xFFFFFF33)])
-      f.returnKeyType = .next
-    }
-
-    func headerStyle(_ label:UILabel) {
-      label.textColor = UIColor(rgb: 0xFFFFFF)
-      label.font = UIFont.systemFont(ofSize: 24.0, weight: .regular)
-    }
-
-    func descriptionStyle(_ label:UILabel) {
-      label.textColor = UIColor(rgb: 0xD8D8D8)
-      label.font = UIFont.systemFont(ofSize: 20.0, weight: .regular)
-    }
-
-    func description2Style(_ label:UILabel) {
-      label.textColor = UIColor(rgba: 0xFFFFFF90)
-      label.font = UIFont.systemFont(ofSize: 18.0, weight: .regular)
-    }
-
-    func signInBtnStyle(_ btn:UIButton) {
-      btn.setImage(UIImage(named: Assets.Icons.rightArrow.rawValue), for: .normal)
-      btn.setBackgroundColor(color: UIColor(rgb: 0xACAEBF), for: .normal)
-      btn.setBackgroundColor(color: UIColor(rgba: 0xACAEBF4C), for: .highlighted)
-      btn.setTitleColor(UIColor(rgba: 0xFFFFFF4C), for: .highlighted)
-      btn.layer.cornerRadius = 2.0
-      btn.layer.borderWidth = 1.0
-      btn.layer.borderColor = UIColor(rgb: 0xFFFFFF).cgColor
-      btn.layer.shadowColor = UIColor.black.cgColor
-      btn.layer.shadowRadius = 10
-      btn.layer.shadowOffset = CGSize(width: 0, height: 8)
-      btn.layer.shadowOpacity = 0.4
-    }
-
-    func linkBtnStyle(_ label:UILabel) {
-      label.textColor = UIColor(rgb: 0xFFFFFF)
-      label.font = UIFont.systemFont(ofSize: 18.0, weight: .regular)
-    }
-
-    func validationLabelStyle(_ label:UILabel) {
-      label.textColor = UIColor(rgb: 0xFC7474)
-      label.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
-    }
-
-    func errorLabelStyle(_ label:UILabel) {
-      label.textColor = UIColor(rgb: 0xFC7474)
-      label.font = UIFont.systemFont(ofSize: 18.0, weight: .regular)
+      // Styling
+      signInDescription.style(TextStyle.description)
+      emailField.style(EditText.loginInput)
+      pwdField.style(EditText.loginInput).style(EditText.secure)
+      signInBtn.style(ButtonStyle.grey(with: UIImage(named: Assets.Icons.rightArrow.rawValue)!))
+      signInLabel.style(TextStyle.header)
+      forgotPwdLabel.style(TextStyle.description2)
+      dontHaveAccountLabel.style(TextStyle.description2)
+      signUpBtn.style(ButtonStyle.linkButton)
+      emailValidationLabel.style(TextStyle.validationError)
+      loginErrorLabel.style(TextStyle.error)
     }
   }
-
 }
 
 
