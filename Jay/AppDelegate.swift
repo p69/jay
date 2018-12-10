@@ -29,8 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window?.rootViewController = signInVc
     window?.makeKeyAndVisible()
 
-    UIApplication.shared.statusBarStyle = .lightContent
-
     return true
   }
 
