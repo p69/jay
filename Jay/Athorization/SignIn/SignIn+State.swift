@@ -15,19 +15,42 @@ extension SignIn {
     if let prev = previousModel {
       return (prev, [])
     }
-    return (Model(email: InputField.valid(""), password: InputField.valid(""), inProgress: false), [])
+    return (Model(email: InputField.valid(""), password: InputField.valid(""), inProgress: false, loginError: nil), [])
   }
 
   static func update(msg: Msg, model: Model) -> (Model, Cmd<Msg>) {
     switch msg {
+
     case .emailChanged(let value):
-      return (model.copyWith(email: InputField.valid(value)), validateEmailCmd(email: value))
+      let newModel = model.copyWith(
+        email: .some(InputField.valid(value)),
+        loginError: OptionalArg<LoginError?>.some(nil))
+      return (newModel, validateEmailCmd(email: value))
+
     case .invalidEmail:
-      return (model.copyWith(email: InputField.invalid(value: model.email.value, error: "Email must be valid") ), [])
+      let newModel = model.copyWith(email: .some(InputField.invalid(value: model.email.value, error: "Email must be valid")))
+      return (newModel, [])
+
     case .pwdChanged(let value):
-      return (model.copyWith(password: InputField.valid(value)), [])
+      let newModel = model.copyWith(
+        password: .some(InputField.valid(value)),
+        loginError: OptionalArg<LoginError?>.some(nil))
+      return (newModel, [])
+
     case .signInTapped:
-      return (model.copyWith(inProgress: true), loginCmd(email: model.email.value, pwd: model.password.value))
+      let newModel = model.copyWith(
+        inProgress: .some(true),
+        loginError: OptionalArg<LoginError?>.some(nil))
+      return (newModel, loginCmd(email: model.email.value, pwd: model.password.value))
+
+    case .loginFailed(let error):
+      let newModel = model.copyWith(inProgress: .some(false), loginError: .some(error))
+      return (newModel, [])
+
+    case .loginSucceeded(_):
+      //TODO: navigate
+      return (model.copyWith(inProgress: .some(false)), [])
+
     default:
       return (model, [])
     }
@@ -50,8 +73,7 @@ fileprivate func loginCmd(email: String, pwd: String) -> Cmd<SignIn.Msg> {
     case .ok(let user):
       dispatcher(SignIn.Msg.loginSucceeded(user: user))
     case .error(let error):
-      debugPrint(error)
-      dispatcher(SignIn.Msg.loginFailed)
+      dispatcher(SignIn.Msg.loginFailed(error: error))
     }
   }
 }

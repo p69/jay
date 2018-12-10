@@ -11,6 +11,7 @@ import UIKit
 import Swiftea
 import Stevia
 import ActionKit
+import Jay_Domain
 
 extension SignIn {
 
@@ -32,7 +33,7 @@ extension SignIn {
     let forgotPwdLabel = UILabel()
     let dontHaveAccountLabel = UILabel()
     let emailValidationLabel = UILabel()
-    let pwdValidationLabel = UILabel()
+    let loginErrorLabel = UILabel()
 
     convenience init() {
       self.init(frame:CGRect.zero)
@@ -42,8 +43,16 @@ extension SignIn {
     func update(dispatch: @escaping Dispatch<SignIn.Msg>, model: SignIn.Model) {
 
       emailField.apply(inputField: model.email, with: emailValidationLabel)
-      pwdField.apply(inputField: model.password, with: pwdValidationLabel)
-      signInBtn.isEnabled = model.email.error == nil && !model.password.value.isEmpty
+
+      if let loginError = model.loginError {
+        loginError.show(in: loginErrorLabel)
+      } else {
+        loginErrorLabel.isHidden = true
+      }
+
+      signInBtn.isEnabled = !model.inProgress
+        && model.email.error == nil
+        && !model.password.value.isEmpty
 
       emailField.addControlEvent(.editingChanged) { [weak self] in
         dispatch(.emailChanged(self?.emailField.text ?? ""))
@@ -71,7 +80,7 @@ extension SignIn {
         signInBtn,
         bottomItemsStack,
         emailValidationLabel,
-        pwdValidationLabel
+        loginErrorLabel
       )
 
       // Vertical + Horizontal Layout in one pass
@@ -87,11 +96,11 @@ extension SignIn {
         |-20-emailValidationLabel-| ~ 10,
         40,
         |-20-pwdField-20-| ~ 50,
-        10,
-        |-20-pwdValidationLabel-| ~ 10,
         8,
         align(rights: forgotPwdLabel)-20-|,
-        60,
+        40,
+        loginErrorLabel.centerHorizontally(),
+        15,
         signInBtn.centerHorizontally().width(>=200) ~ 50,
         50,
         bottomItemsStack.centerHorizontally()
@@ -116,7 +125,7 @@ extension SignIn {
       dontHaveAccountLabel.style(description2Style)
       signUpBtn.style(linkBtnStyle)
       emailValidationLabel.style(validationLabelStyle)
-      pwdValidationLabel.style(validationLabelStyle)
+      loginErrorLabel.style(errorLabelStyle)
 
       // Content 🖋
       signInBtn.setTitle("Sign In", for: .normal)
@@ -180,7 +189,26 @@ extension SignIn {
       label.textColor = UIColor(rgb: 0xFC7474)
       label.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
     }
+
+    func errorLabelStyle(_ label:UILabel) {
+      label.textColor = UIColor(rgb: 0xFC7474)
+      label.font = UIFont.systemFont(ofSize: 18.0, weight: .regular)
+    }
   }
 
 }
 
+
+extension LoginError {
+  func show(in label:UILabel) {
+    label.isHidden = false
+    switch self {
+    case .wrongPassword(let email):
+      label.text = "Incorrect password for \(email)"
+    case .notFound(let email):
+      label.text = "User \(email) not found"
+    case .generic(_):
+      label.text = "Error occured"
+    }
+  }
+}

@@ -103,7 +103,7 @@ public struct AuthContext {
   }
 }
 
-public enum LoginError {
+public enum LoginError: Equatable {
   case generic(message: String)
   case notFound(email: String)
   case wrongPassword(email: String)

@@ -16,13 +16,14 @@ enum SignIn {
     let email: InputField
     let password: InputField
     let inProgress: Bool
+    let loginError: LoginError?
   }
 
   enum Msg {
     case emailChanged(String), pwdChanged(String)
     case signInTapped, signUpTapped
     case invalidEmail
-    case loginFailed, loginSucceeded(user: User)
+    case loginFailed(error: LoginError), loginSucceeded(user: User)
   }
   
   static func mkProgramWith<TView: SwifteaView>(view: TView, model: Model?)->Program<Model, Msg, ()>
@@ -37,9 +38,13 @@ enum SignIn {
 }
 
 extension SignIn.Model {
-  func copyWith(email: InputField? = nil, password: InputField? = nil, inProgress: Bool? = nil) -> SignIn.Model {
-    return SignIn.Model(email: email ?? self.email,
-                        password: password ?? self.password,
-                        inProgress: inProgress ?? self.inProgress)
+  func copyWith(email: OptionalArg<InputField> = .none,
+                password: OptionalArg<InputField> = .none,
+                inProgress: OptionalArg<Bool> = .none,
+                loginError: OptionalArg<LoginError?> = .none) -> SignIn.Model {
+    return SignIn.Model(email: email.value ?? self.email,
+                        password: password.value ?? self.password,
+                        inProgress: inProgress.value ?? self.inProgress,
+                        loginError: loginError.value ?? self.loginError)
   }
 }
