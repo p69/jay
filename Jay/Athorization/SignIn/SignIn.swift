@@ -8,26 +8,38 @@
 
 import Foundation
 import Swiftea
+import Jay_Domain
 
 enum SignIn {
 
-  struct SignInModel: Equatable {
-    let email: String
-    let password: String
+  struct Model: Equatable {
+    let email: InputField
+    let password: InputField
     let inProgress: Bool
   }
 
-  enum SignInMsg {
+  enum Msg {
     case emailChanged(String), pwdChanged(String)
     case signInTapped, signUpTapped
+    case invalidEmail
+    case loginFailed, loginSucceeded(user: User)
   }
   
-  static func mkProgramWith<TView: SwifteaView>(view: TView, model: SignInModel?)->Program<SignInModel, SignInMsg, ()>
-    where TView.TModel == SignInModel, TView.TMsg == SignInMsg {
+  static func mkProgramWith<TView: SwifteaView>(view: TView, model: Model?)->Program<Model, Msg, ()>
+    where TView.TModel == Model, TView.TMsg == Msg {
       return Program.mkSimple(
         initModel: { initModel(with: model) },
         update: update,
         view: view.update)
   }
 
+  static let context = AuthContext(repository: RealmUsersRepository())
+}
+
+extension SignIn.Model {
+  func copyWith(email: InputField? = nil, password: InputField? = nil, inProgress: Bool? = nil) -> SignIn.Model {
+    return SignIn.Model(email: email ?? self.email,
+                        password: password ?? self.password,
+                        inProgress: inProgress ?? self.inProgress)
+  }
 }

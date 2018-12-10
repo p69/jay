@@ -67,6 +67,14 @@ extension Result {
       return .ok(onError(x))
     }
   }
+
+  public var error: E? {
+    return either(onOk: {_ in nil}, onError: {e in e})
+  }
+
+  public var ok: T? {
+    return either(onOk: {x in x}, onError: {_ in nil})
+  }
 }
 
 

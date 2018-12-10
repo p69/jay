@@ -19,9 +19,9 @@ extension SignIn {
     case password = "your password"
   }
 
-  final class SignInView: UIView, SwifteaView {
-    typealias TModel = SignInModel
-    typealias TMsg = SignInMsg
+  final class View: UIView, SwifteaView {
+    typealias TModel = Model
+    typealias TMsg = Msg
 
     let signInBtn = ButtonWithIcon()
     let emailField = UITextField()
@@ -31,14 +31,20 @@ extension SignIn {
     let signInDescription = UILabel()
     let forgotPwdLabel = UILabel()
     let dontHaveAccountLabel = UILabel()
+    let emailValidationLabel = UILabel()
+    let pwdValidationLabel = UILabel()
 
     convenience init() {
       self.init(frame:CGRect.zero)
       layout()
     }
 
-    func update(dispatch: @escaping Dispatch<SignIn.SignInMsg>, model: SignIn.SignInModel) {
-      
+    func update(dispatch: @escaping Dispatch<SignIn.Msg>, model: SignIn.Model) {
+
+      emailField.apply(inputField: model.email, with: emailValidationLabel)
+      pwdField.apply(inputField: model.password, with: pwdValidationLabel)
+      signInBtn.isEnabled = model.email.error == nil && !model.password.value.isEmpty
+
       emailField.addControlEvent(.editingChanged) { [weak self] in
         dispatch(.emailChanged(self?.emailField.text ?? ""))
       }
@@ -63,7 +69,9 @@ extension SignIn {
         pwdField,
         forgotPwdLabel,
         signInBtn,
-        bottomItemsStack
+        bottomItemsStack,
+        emailValidationLabel,
+        pwdValidationLabel
       )
 
       // Vertical + Horizontal Layout in one pass
@@ -75,8 +83,12 @@ extension SignIn {
         signInDescription.centerHorizontally(),
         50,
         |-20-emailField-20-| ~ 50,
-        50,
+        10,
+        |-20-emailValidationLabel-| ~ 10,
+        40,
         |-20-pwdField-20-| ~ 50,
+        10,
+        |-20-pwdValidationLabel-| ~ 10,
         8,
         align(rights: forgotPwdLabel)-20-|,
         60,
@@ -103,6 +115,8 @@ extension SignIn {
       forgotPwdLabel.style(description2Style)
       dontHaveAccountLabel.style(description2Style)
       signUpBtn.style(linkBtnStyle)
+      emailValidationLabel.style(validationLabelStyle)
+      pwdValidationLabel.style(validationLabelStyle)
 
       // Content 🖋
       signInBtn.setTitle("Sign In", for: .normal)
@@ -134,7 +148,7 @@ extension SignIn {
     }
 
     func descriptionStyle(_ label:UILabel) {
-      label.textColor = UIColor(rgba: 0xFFFFFFDD)
+      label.textColor = UIColor(rgb: 0xD8D8D8)
       label.font = UIFont.systemFont(ofSize: 20.0, weight: .regular)
     }
 
@@ -145,7 +159,9 @@ extension SignIn {
 
     func signInBtnStyle(_ btn:UIButton) {
       btn.setImage(UIImage(named: Assets.Icons.rightArrow.rawValue), for: .normal)
-      btn.backgroundColor = UIColor(rgb: 0xACAEBF)
+      btn.setBackgroundColor(color: UIColor(rgb: 0xACAEBF), for: .normal)
+      btn.setBackgroundColor(color: UIColor(rgba: 0xACAEBF4C), for: .highlighted)
+      btn.setTitleColor(UIColor(rgba: 0xFFFFFF4C), for: .highlighted)
       btn.layer.cornerRadius = 2.0
       btn.layer.borderWidth = 1.0
       btn.layer.borderColor = UIColor(rgb: 0xFFFFFF).cgColor
@@ -158,6 +174,11 @@ extension SignIn {
     func linkBtnStyle(_ label:UILabel) {
       label.textColor = UIColor(rgb: 0xFFFFFF)
       label.font = UIFont.systemFont(ofSize: 18.0, weight: .regular)
+    }
+
+    func validationLabelStyle(_ label:UILabel) {
+      label.textColor = UIColor(rgb: 0xFC7474)
+      label.font = UIFont.systemFont(ofSize: 14.0, weight: .regular)
     }
   }
 

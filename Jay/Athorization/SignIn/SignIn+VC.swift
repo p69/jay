@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 import Swiftea
 
-class SignInViewController: BaseViewController<SignIn.SignInView, SignIn.SignInModel, SignIn.SignInMsg> {
+class SignInViewController: BaseViewController<SignIn.View, SignIn.Model, SignIn.Msg> {
   convenience init() {
-    self.init(createView: SignIn.SignInView.init, createProgram: SignIn.mkProgramWith)
+    self.init(createView: SignIn.View.init, createProgram: SignIn.mkProgramWith)
   }
 }

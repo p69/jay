@@ -23,6 +23,8 @@
 		6D520DD22168F91D00E2DDC9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6D520DD02168F91D00E2DDC9 /* LaunchScreen.storyboard */; };
 		6D520DE82168F91D00E2DDC9 /* JayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D520DE72168F91D00E2DDC9 /* JayUITests.swift */; };
 		6D87FDBA21762126000109C4 /* SwifteaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D87FDB921762126000109C4 /* SwifteaView.swift */; };
+		6DC34BCF21BE5CD200CC41C0 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC34BCE21BE5CD200CC41C0 /* Form.swift */; };
+		6DC34BD121BE6EA300CC41C0 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC34BD021BE6EA300CC41C0 /* UIButton.swift */; };
 		6DD25BDC216A977600193C22 /* Swiftea.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DD25BDB216A977600193C22 /* Swiftea.framework */; };
 		6DF6924421B6AA0B000CEF4C /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF6924321B6AA0B000CEF4C /* HelperFunctions.swift */; };
 		6DF6924621B6B5D4000CEF4C /* DomainAuthSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DF6924521B6B5D4000CEF4C /* DomainAuthSpec.swift */; };
@@ -82,6 +84,8 @@
 		6D520DE72168F91D00E2DDC9 /* JayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JayUITests.swift; sourceTree = "<group>"; };
 		6D520DE92168F91D00E2DDC9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6D87FDB921762126000109C4 /* SwifteaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwifteaView.swift; sourceTree = "<group>"; };
+		6DC34BCE21BE5CD200CC41C0 /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
+		6DC34BD021BE6EA300CC41C0 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		6DD25BDB216A977600193C22 /* Swiftea.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swiftea.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6DF6924321B6AA0B000CEF4C /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
 		6DF6924521B6B5D4000CEF4C /* DomainAuthSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomainAuthSpec.swift; sourceTree = "<group>"; };
@@ -254,6 +258,7 @@
 			children = (
 				6D87FDB921762126000109C4 /* SwifteaView.swift */,
 				6DF6924721B9212F000CEF4C /* BaseViewController.swift */,
+				6DC34BCE21BE5CD200CC41C0 /* Form.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -279,6 +284,7 @@
 				6DF6924C21B96DDF000CEF4C /* UIColor.swift */,
 				6DF6924E21B99C18000CEF4C /* UITextField.swift */,
 				6DF6925821BA9FF1000CEF4C /* UIStackView.swift */,
+				6DC34BD021BE6EA300CC41C0 /* UIButton.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -587,6 +593,7 @@
 				6D4675852195E464000EC970 /* SignIn.swift in Sources */,
 				6DF6924821B9212F000CEF4C /* BaseViewController.swift in Sources */,
 				6DF6924A21B92DD2000CEF4C /* SignIn+VC.swift in Sources */,
+				6DC34BCF21BE5CD200CC41C0 /* Form.swift in Sources */,
 				6D520DC82168F91C00E2DDC9 /* AppDelegate.swift in Sources */,
 				6DF6924D21B96DDF000CEF4C /* UIColor.swift in Sources */,
 				6DF6925721BA61E5000CEF4C /* ButtinWithIcon.swift in Sources */,
@@ -597,6 +604,7 @@
 				6D4675872195E4FE000EC970 /* SignIn+View.swift in Sources */,
 				6D46758F21ABF73B000EC970 /* Storages.swift in Sources */,
 				6DF6924F21B99C18000CEF4C /* UITextField.swift in Sources */,
+				6DC34BD121BE6EA300CC41C0 /* UIButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

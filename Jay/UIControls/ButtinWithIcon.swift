@@ -17,4 +17,19 @@ class ButtonWithIcon: UIButton {
       titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: icon.frame.width)
     }
   }
+
+  override var isEnabled: Bool {
+    didSet {
+      self.alpha = self.isEnabled ? 1.0 : 0.3
+    }
+  }
+
+  override var isHighlighted: Bool {
+    didSet {
+      if let borderColor = self.layer.borderColor {
+        let newColor = UIColor(cgColor: borderColor).withAlphaComponent(isHighlighted ? 0.3 : 1.0)
+        self.layer.borderColor = newColor.cgColor
+      }
+    }
+  }
 }
