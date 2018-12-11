@@ -36,8 +36,8 @@ class BaseViewController<TView: SwifteaView, TModel: Equatable, TMsg> : UIViewCo
     gradientLayer.frame = UIScreen.main.bounds
 
     gradientLayer.colors = [
-      UIColor(rgb: 0x5F627D).cgColor,
-      UIColor(rgb: 0x313347).cgColor
+      Colors.backgroundGradientStart.rawValue.cgColor,
+      Colors.backgroundGradientEnd.rawValue.cgColor
     ]
     gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
     gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)

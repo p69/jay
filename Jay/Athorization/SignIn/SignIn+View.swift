@@ -1,11 +1,3 @@
-//
-//  SignIn+View.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 11/9/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 import UIKit
 import Swiftea
@@ -27,7 +19,7 @@ extension SignIn {
     let signInBtn = ButtonWithIcon()
     let emailField = UITextField()
     let pwdField = UITextField()
-    let signUpBtn = UILabel()
+    let signUpBtn = UIButton()
     let signInLabel = UILabel()
     let signInDescription = UILabel()
     let forgotPwdLabel = UILabel()
@@ -83,8 +75,7 @@ extension SignIn {
         loginErrorLabel
       )
 
-      // Vertical + Horizontal Layout in one pass
-      // With type-safe visual format
+      // Vertical + Horizontal Layout
       layout(
         80,
         signInLabel.centerHorizontally(),
@@ -115,7 +106,7 @@ extension SignIn {
       signInDescription.text = "Sign In to your account."
       forgotPwdLabel.text = "Forgot passwrd?"
       dontHaveAccountLabel.text = "Don't have an account yet?"
-      signUpBtn.text = "Sign Up"
+      signUpBtn.setTitle("Sign Up", for: .normal)
 
       // Styling
       signInDescription.style(TextStyle.description)
