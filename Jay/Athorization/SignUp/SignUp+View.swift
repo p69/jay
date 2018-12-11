@@ -35,11 +35,11 @@ extension SignUp {
 
     func update(dispatch: @escaping Dispatch<SignUp.Msg>, model: SignUp.Model) {
 
-      emailField.apply(inputField: model.email, with: emailValidationLabel)
-      pwdField.text = model.password.value
-      retypePwdField.text = model.retypePassword.value
-      firstNameField.text = model.firstName.value
-      lastNameField.text = model.lastName.value
+      emailField.apply(model: model.email, with: emailValidationLabel)
+      pwdField.apply(model: model.password)
+      retypePwdField.apply(model: model.retypePassword)
+      firstNameField.apply(model: model.firstName)
+      lastNameField.apply(model: model.lastName)
 
       if let regError = model.registrationError {
         regError.show(in: errorLabel)
@@ -110,9 +110,9 @@ extension SignUp {
         |-20-pwdField-20-| ~ 50,
         20,
         |-20-retypePwdField-20-| ~ 50,
-        50,
-        errorLabel.centerHorizontally(),
         20,
+        |-20-errorLabel-20-|,
+        40,
         createBtn.centerHorizontally().width(>=200) ~ 50
       )
 

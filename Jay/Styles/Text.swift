@@ -25,5 +25,7 @@ enum TextStyle {
   static func error(_ label:UILabel) {
     label.textColor = Colors.Text.error.rawValue
     label.font = Fonts.display1
+    label.contentMode = .scaleToFill
+    label.numberOfLines = 2
   }
 }

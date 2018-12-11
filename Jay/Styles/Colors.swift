@@ -14,6 +14,7 @@ enum Colors: Color {
   case backgroundGradientStart = 0x5F627DFF
   case backgroundGradientEnd = 0x313347FF
   case navigationBarItem = 0xFFFFFFFF
+  case invalidInputBorder = 0xFC7474FF
   
   enum Text: Color {
     case main = 0xFFFFFFFF

@@ -8,11 +8,11 @@ extension SignUp {
       return (prev, [])
     }
 
-    return (Model(email: InputField.valid(""),
-                  firstName: InputField.valid(""),
-                  lastName: InputField.valid(""),
-                  password: InputField.valid(""),
-                  retypePassword: InputField.valid(""),
+    return (Model(email: InputFieldModel.valid(""),
+                  firstName: InputFieldModel.valid(""),
+                  lastName: InputFieldModel.valid(""),
+                  password: InputFieldModel.valid(""),
+                  retypePassword: InputFieldModel.valid(""),
                   inProgress: false,
                   registrationError: nil), [])
   }
@@ -22,34 +22,34 @@ extension SignUp {
 
     case .emailChanged(let value):
       let newModel = model.copyWith(
-        email: .some(InputField.valid(value)),
+        email: .some(InputFieldModel.valid(value)),
         registrationError: nilArg())
-      return (newModel, validateEmailCmd(email: value))
+      return (newModel, value.isEmpty ? [] : validateEmailCmd(email: value))
 
     case .invalidEmail:
-      let newModel = model.copyWith(email: .some(InputField.invalid(value: model.email.value, error: "Email must be valid")))
+      let newModel = model.copyWith(email: .some(model.email.setError(with: "Email must be valid")))
       return (newModel, [])
 
     case .firstNameChanged(let value):
       let newModel = model.copyWith(
-        firstName: .some(InputField.valid(value)),
+        firstName: .some(InputFieldModel.valid(value)),
         registrationError: nilArg())
       return (newModel, [])
 
     case .lastNameChanged(let value):
       let newModel = model.copyWith(
-        lastName: .some(InputField.valid(value)))
+        lastName: .some(InputFieldModel.valid(value)))
       return (newModel, [])
 
     case .pwdChanged(let value):
       let newModel = model.copyWith(
-        password: .some(InputField.valid(value)),
+        password: .some(InputFieldModel.valid(value)),
         registrationError: nilArg())
       return (newModel, [])
 
     case .retypePwdChanged(let value):
       let newModel = model.copyWith(
-        retypePassword: .some(InputField.valid(value)),
+        retypePassword: .some(InputFieldModel.valid(value)),
         registrationError: nilArg())
       return (newModel, [])
 
@@ -61,7 +61,8 @@ extension SignUp {
                                   pwd: model.password.value,
                                   retypePwd: model.retypePassword.value))
     case .createFailed(let error):
-      let newModel = model.copyWith(
+      var newModel = updateFieldsState(model: model, error: error)
+      newModel = newModel.copyWith(
         inProgress: .some(false),
         registrationError: .some(error))
       return (newModel, [])
@@ -72,9 +73,25 @@ extension SignUp {
         inProgress: .some(false),
         registrationError: nilArg())
       return (newModel, [])
+    }
+  }
 
+  private static func updateFieldsState(model: Model, error: RegistrationError) -> Model {
+    switch error {
+    case .invalidEmail:
+      let email = model.email.setError(with: "Email must be valid")
+      return model.copyWith(email: .some(email))
+    case .weakPassword(_):
+      let password = model.password.setError()
+      return model.copyWith(password: .some(password))
+    case .alreadyExists:
+      let email = model.email.setError()
+      return model.copyWith(email: .some(email))
+    case .retypePwdError:
+      let retype = model.retypePassword.setError()
+      return model.copyWith(retypePassword: .some(retype))
     default:
-      return (model, [])
+      return model
     }
   }
 

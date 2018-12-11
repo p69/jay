@@ -1,21 +1,13 @@
-//
-//  Form.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 12/10/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
 //MARK: represents possible states of typical input
-enum InputField: Equatable {
+enum InputFieldModel: Equatable {
   case valid(_ value: String)
   case invalid(value: String, error: String)
 }
 
-extension InputField {
+extension InputFieldModel {
   var value: String {
     switch self {
     case .valid(let val):
@@ -35,22 +27,32 @@ extension InputField {
   }
 }
 
-extension UITextField {
-  func apply(inputField: InputField, with validationLabel: UILabel, showErrorForEmpty: Bool = false) {
-    switch inputField {
+extension InputFieldModel {
+  func setError(with error: String = "") -> InputFieldModel {
+    switch self {
     case .valid(let val):
-      validationLabel.isHidden = true
-      validationLabel.text = nil
+      return .invalid(value: val, error: error)
+    default:
+      return self
+    }
+  }
+}
+
+
+extension UITextField {
+  func apply(model: InputFieldModel, with errorLabel: UILabel? = nil) {
+    switch model {
+    case .valid(let val):
+      self.style(EditText.validInput)
       self.text = val
+      errorLabel?.isHidden = true
+      errorLabel?.text = nil
+
     case .invalid(let val, let error):
+      self.style(EditText.invalidInput)
       self.text = val
-      if val.isEmpty {
-        validationLabel.isHidden = !showErrorForEmpty
-        validationLabel.text = showErrorForEmpty ? error : nil
-      } else {
-        validationLabel.isHidden = false
-        validationLabel.text = error
-      }
+      errorLabel?.isHidden = false
+      errorLabel?.text = error
     }
   }
 }

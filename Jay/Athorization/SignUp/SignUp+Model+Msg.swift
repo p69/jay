@@ -5,11 +5,11 @@ import Jay_Domain
 enum SignUp {
 
   struct Model: Equatable {
-    let email: InputField
-    let firstName: InputField
-    let lastName: InputField
-    let password: InputField
-    let retypePassword: InputField
+    let email: InputFieldModel
+    let firstName: InputFieldModel
+    let lastName: InputFieldModel
+    let password: InputFieldModel
+    let retypePassword: InputFieldModel
     let inProgress: Bool
     let registrationError: RegistrationError?
   }
@@ -31,11 +31,11 @@ enum SignUp {
 }
 
 extension SignUp.Model {
-  func copyWith(email: OptionalArg<InputField> = .none,
-                firstName: OptionalArg<InputField> = .none,
-                lastName: OptionalArg<InputField> = .none,
-                password: OptionalArg<InputField> = .none,
-                retypePassword: OptionalArg<InputField> = .none,
+  func copyWith(email: OptionalArg<InputFieldModel> = .none,
+                firstName: OptionalArg<InputFieldModel> = .none,
+                lastName: OptionalArg<InputFieldModel> = .none,
+                password: OptionalArg<InputFieldModel> = .none,
+                retypePassword: OptionalArg<InputFieldModel> = .none,
                 inProgress: OptionalArg<Bool> = .none,
                 registrationError: OptionalArg<RegistrationError?> = .none) -> SignUp.Model {
     return SignUp.Model(email: email.value ?? self.email,

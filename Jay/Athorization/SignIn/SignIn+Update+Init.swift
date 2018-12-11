@@ -1,11 +1,3 @@
-//
-//  SignIn+State.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 11/9/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 import Swiftea
 import Jay_Domain
@@ -15,7 +7,7 @@ extension SignIn {
     if let prev = previousModel {
       return (prev, [])
     }
-    return (Model(email: InputField.valid(""), password: InputField.valid(""), inProgress: false, loginError: nil), [])
+    return (Model(email: InputFieldModel.valid(""), password: InputFieldModel.valid(""), inProgress: false, loginError: nil), [])
   }
 
   static func update(msg: Msg, model: Model, router: AuthRouter) -> (Model, Cmd<Msg>) {
@@ -23,17 +15,17 @@ extension SignIn {
 
     case .emailChanged(let value):
       let newModel = model.copyWith(
-        email: .some(InputField.valid(value)),
+        email: .some(InputFieldModel.valid(value)),
         loginError: nilArg())
-      return (newModel, validateEmailCmd(email: value))
+      return (newModel, value.isEmpty ? [] : validateEmailCmd(email: value))
 
     case .invalidEmail:
-      let newModel = model.copyWith(email: .some(InputField.invalid(value: model.email.value, error: "Email must be valid")))
+      let newModel = model.copyWith(email: .some(InputFieldModel.invalid(value: model.email.value, error: "Email must be valid")))
       return (newModel, [])
 
     case .pwdChanged(let value):
       let newModel = model.copyWith(
-        password: .some(InputField.valid(value)),
+        password: .some(InputFieldModel.valid(value)),
         loginError: nilArg())
       return (newModel, [])
 
@@ -44,7 +36,10 @@ extension SignIn {
       return (newModel, loginCmd(email: model.email.value, pwd: model.password.value))
 
     case .loginFailed(let error):
-      let newModel = model.copyWith(inProgress: .some(false), loginError: .some(error))
+      let newModel = model.copyWith(
+        password: tryUpdatePwdField(model, error),
+        inProgress: .some(false),
+        loginError: .some(error))
       return (newModel, [])
 
     case .loginSucceeded(_):
@@ -54,9 +49,15 @@ extension SignIn {
     case .signUpTapped:
       //TODO: navigate
       return (model, Cmd<SignIn.Msg>.of { _ in router.goToSignUp() })
+    }
+  }
 
+  private static func tryUpdatePwdField(_ model: Model,_ error: LoginError) -> OptionalArg<InputFieldModel> {
+    switch error {
+    case .wrongPassword(_):
+      return .some(model.password.setError())
     default:
-      return (model, [])
+      return .none
     }
   }
 }

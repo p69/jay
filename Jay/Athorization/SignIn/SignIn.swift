@@ -1,11 +1,4 @@
 //
-//  SignIn.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 11/9/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 import Swiftea
 import Jay_Domain
@@ -13,8 +6,8 @@ import Jay_Domain
 enum SignIn {
 
   struct Model: Equatable {
-    let email: InputField
-    let password: InputField
+    let email: InputFieldModel
+    let password: InputFieldModel
     let inProgress: Bool
     let loginError: LoginError?
   }
@@ -38,8 +31,8 @@ enum SignIn {
 }
 
 extension SignIn.Model {
-  func copyWith(email: OptionalArg<InputField> = .none,
-                password: OptionalArg<InputField> = .none,
+  func copyWith(email: OptionalArg<InputFieldModel> = .none,
+                password: OptionalArg<InputFieldModel> = .none,
                 inProgress: OptionalArg<Bool> = .none,
                 loginError: OptionalArg<LoginError?> = .none) -> SignIn.Model {
     return SignIn.Model(email: email.value ?? self.email,
