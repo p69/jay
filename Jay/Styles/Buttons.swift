@@ -5,18 +5,22 @@ enum ButtonStyle {
   static func grey(with icon: UIImage) -> (UIButton)->() {
     return { btn in
       btn.setImage(icon, for: .normal)
-      btn.setBackgroundColor(color: Colors.Buttons.grey.rawValue, for: .normal)
-      btn.setBackgroundColor(color: Colors.Buttons.greyHighlighted.rawValue, for: .highlighted)
-      btn.setTitleColor(Colors.Text.main.rawValue, for: .normal)
-      btn.setTitleColor(Colors.Text.mainHighlighted.rawValue, for: .highlighted)
-      btn.layer.cornerRadius = 2.0
-      btn.layer.borderWidth = 1.0
-      btn.layer.borderColor = Colors.Buttons.greyBorder.rawValue.cgColor
-      btn.layer.shadowColor = Colors.Buttons.shadowColor.rawValue.cgColor
-      btn.layer.shadowRadius = 10
-      btn.layer.shadowOffset = CGSize(width: 0, height: 8)
-      btn.layer.shadowOpacity = 0.4
+      grey(btn)
     }
+  }
+
+  static func grey(_ btn: UIButton) {
+    btn.setBackgroundColor(color: Colors.Buttons.grey.rawValue, for: .normal)
+    btn.setBackgroundColor(color: Colors.Buttons.greyHighlighted.rawValue, for: .highlighted)
+    btn.setTitleColor(Colors.Text.main.rawValue, for: .normal)
+    btn.setTitleColor(Colors.Text.mainHighlighted.rawValue, for: .highlighted)
+    btn.layer.cornerRadius = 2.0
+    btn.layer.borderWidth = 1.0
+    btn.layer.borderColor = Colors.Buttons.greyBorder.rawValue.cgColor
+    btn.layer.shadowColor = Colors.Buttons.shadowColor.rawValue.cgColor
+    btn.layer.shadowRadius = 10
+    btn.layer.shadowOffset = CGSize(width: 0, height: 8)
+    btn.layer.shadowOpacity = 0.4
   }
 
   static func linkButton(_ btn:UIButton) {

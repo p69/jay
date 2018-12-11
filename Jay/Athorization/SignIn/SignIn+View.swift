@@ -20,7 +20,6 @@ extension SignIn {
     let emailField = UITextField()
     let pwdField = UITextField()
     let signUpBtn = UIButton()
-    let signInLabel = UILabel()
     let signInDescription = UILabel()
     let forgotPwdLabel = UILabel()
     let dontHaveAccountLabel = UILabel()
@@ -39,7 +38,7 @@ extension SignIn {
       if let loginError = model.loginError {
         loginError.show(in: loginErrorLabel)
       } else {
-        loginErrorLabel.isHidden = true
+        loginErrorLabel.text = " "
       }
 
       signInBtn.isEnabled = !model.inProgress
@@ -58,13 +57,17 @@ extension SignIn {
         dispatch(.signInTapped)
       }
 
+      signUpBtn.addControlEvent(.touchDown) {
+        dispatch(.signUpTapped)
+      }
+
     }
 
     func layout() {
       let bottomItemsStack = [dontHaveAccountLabel, signUpBtn].wrapInHorizontalStack()
 
       sv(
-        signInLabel,
+
         signInDescription,
         emailField,
         pwdField,
@@ -77,9 +80,7 @@ extension SignIn {
 
       // Vertical + Horizontal Layout
       layout(
-        80,
-        signInLabel.centerHorizontally(),
-        80,
+        160,
         signInDescription.centerHorizontally(),
         50,
         |-20-emailField-20-| ~ 50,
@@ -102,7 +103,6 @@ extension SignIn {
       emailField.placeholder = Placeholders.email.rawValue
       pwdField.placeholder = Placeholders.password.rawValue
       signInBtn.setTitle("Sign In", for: .normal)
-      signInLabel.text = "Sign In"
       signInDescription.text = "Sign In to your account."
       forgotPwdLabel.text = "Forgot passwrd?"
       dontHaveAccountLabel.text = "Don't have an account yet?"
@@ -113,7 +113,6 @@ extension SignIn {
       emailField.style(EditText.loginInput)
       pwdField.style(EditText.loginInput).style(EditText.secure)
       signInBtn.style(ButtonStyle.grey(with: UIImage(named: Assets.Icons.rightArrow.rawValue)!))
-      signInLabel.style(TextStyle.header)
       forgotPwdLabel.style(TextStyle.description2)
       dontHaveAccountLabel.style(TextStyle.description2)
       signUpBtn.style(ButtonStyle.linkButton)
@@ -126,7 +125,6 @@ extension SignIn {
 
 extension LoginError {
   func show(in label:UILabel) {
-    label.isHidden = false
     switch self {
     case .wrongPassword(let email):
       label.text = "Incorrect password for \(email)"

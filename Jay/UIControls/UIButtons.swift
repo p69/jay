@@ -1,15 +1,7 @@
-//
-//  ButtinWithIcon.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 12/7/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
-class ButtonWithIcon: UIButton {
+class ButtonWithIcon: SimpleHighlightedButton {
   override func layoutSubviews() {
     super.layoutSubviews()
     if let icon = imageView {
@@ -17,7 +9,9 @@ class ButtonWithIcon: UIButton {
       titleEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: icon.frame.width)
     }
   }
+}
 
+class SimpleHighlightedButton: UIButton {
   override var isEnabled: Bool {
     didSet {
       self.alpha = self.isEnabled ? 1.0 : 0.3

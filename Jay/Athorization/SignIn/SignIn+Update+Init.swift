@@ -18,7 +18,7 @@ extension SignIn {
     return (Model(email: InputField.valid(""), password: InputField.valid(""), inProgress: false, loginError: nil), [])
   }
 
-  static func update(msg: Msg, model: Model) -> (Model, Cmd<Msg>) {
+  static func update(msg: Msg, model: Model, router: AuthRouter) -> (Model, Cmd<Msg>) {
     switch msg {
 
     case .emailChanged(let value):
@@ -50,6 +50,10 @@ extension SignIn {
     case .loginSucceeded(_):
       //TODO: navigate
       return (model.copyWith(inProgress: .some(false)), [])
+
+    case .signUpTapped:
+      //TODO: navigate
+      return (model, Cmd<SignIn.Msg>.of { _ in router.goToSignUp() })
 
     default:
       return (model, [])

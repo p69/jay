@@ -109,7 +109,7 @@ public enum LoginError: Equatable {
   case wrongPassword(email: String)
 }
 
-public enum RegistrationError {
+public enum RegistrationError: Equatable {
   case invalidEmail
   case alreadyExists
   case weakPassword(hint: String)
