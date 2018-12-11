@@ -1,11 +1,3 @@
-//
-//  OptionalArg.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 12/10/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 
 enum OptionalArg<T> {
@@ -21,4 +13,8 @@ extension OptionalArg {
       return nil
     }
   }
+}
+
+func nilArg<T>() -> OptionalArg<T?> {
+  return OptionalArg<T?>.some(Optional<T>.none)
 }

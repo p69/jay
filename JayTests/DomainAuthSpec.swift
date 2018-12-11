@@ -1,11 +1,3 @@
-//
-//  DomainAuthSpec.swift
-//  JayTests
-//
-//  Created by Pavel Shyliahau on 12/4/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 import Quick
 import Nimble
@@ -40,7 +32,7 @@ class DomainAuthSpec: QuickSpec {
 
       let joey = self.existedUsers[0]
       _ = Auth
-        .createNew(email: joey.email, firstName: joey.firstName, lastName: joey.lastName, pwd: self.existedUserPwd)
+        .createNew(email: joey.email, firstName: joey.firstName, lastName: joey.lastName, pwd: self.existedUserPwd, retypePwd: self.existedUserPwd)
         .run(self.context)
     }
 
@@ -78,7 +70,7 @@ class DomainAuthSpec: QuickSpec {
       it("with invalid email") {
         let email = "p.shilyagov_gmail.com"
 
-        let newUserResult = Auth.createNew(email: email, firstName: "", lastName: "", pwd: "").run(self.context)
+        let newUserResult = Auth.createNew(email: email, firstName: "", lastName: "", pwd: "", retypePwd: "").run(self.context)
 
         expectResultError(newUserResult) { error in
           switch error {
@@ -94,7 +86,7 @@ class DomainAuthSpec: QuickSpec {
         let email = "p.shilyagov@gmail.com"
         let password = "1234567"
 
-        let newUserResult = Auth.createNew(email: email, firstName: "", lastName: "", pwd: password).run(self.context)
+        let newUserResult = Auth.createNew(email: email, firstName: "", lastName: "", pwd: password, retypePwd: password).run(self.context)
 
         expectResultError(newUserResult) { error in
           switch error {
@@ -110,7 +102,7 @@ class DomainAuthSpec: QuickSpec {
         let email = "p.shilyagov@gmail.com"
         let password = "12345678"
 
-        let newUserResult = Auth.createNew(email: email, firstName: "", lastName: "", pwd: password).run(self.context)
+        let newUserResult = Auth.createNew(email: email, firstName: "", lastName: "", pwd: password, retypePwd: password).run(self.context)
 
         expectResultError(newUserResult) { error in
           switch error {
@@ -126,7 +118,7 @@ class DomainAuthSpec: QuickSpec {
         let email = "p.shilyagov@gmail.com"
         let password = "a2345678"
 
-        let newUserResult = Auth.createNew(email: email, firstName: "", lastName: "", pwd: password).run(self.context)
+        let newUserResult = Auth.createNew(email: email, firstName: "", lastName: "", pwd: password, retypePwd: password).run(self.context)
 
         expectResultError(newUserResult) { error in
           switch error {
@@ -138,13 +130,31 @@ class DomainAuthSpec: QuickSpec {
         }
       }
 
+      it("when retype doesn't match password") {
+        let email = "p.shilyagov@gmail.com"
+        let password = "a234567!"
+        let retype = "a234567*"
+
+        let newUserResult = Auth.createNew(email: email, firstName: "", lastName: "", pwd: password, retypePwd: retype).run(self.context)
+
+        expectResultError(newUserResult) { error in
+          switch error {
+          case RegistrationError.retypePwdError:
+            break
+          default:
+            fail("Must be retypePwdError error, but got \(error)")
+          }
+        }
+      }
+
       it("with valid data") {
         let email = "p.shilyagov@gmail.com"
         let password = "a234567!"
+        let retype = "a234567!"
         let firstName = "Pavel"
         let lastName = "Shilyagov"
 
-        let newUserResult = Auth.createNew(email: email, firstName: firstName, lastName: lastName, pwd: password).run(self.context)
+        let newUserResult = Auth.createNew(email: email, firstName: firstName, lastName: lastName, pwd: password, retypePwd: retype).run(self.context)
 
         expectResultOk(newUserResult) { (user:User) in
           expect(user.email) == email

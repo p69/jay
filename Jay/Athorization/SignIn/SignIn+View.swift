@@ -34,6 +34,7 @@ extension SignIn {
     func update(dispatch: @escaping Dispatch<SignIn.Msg>, model: SignIn.Model) {
 
       emailField.apply(inputField: model.email, with: emailValidationLabel)
+      pwdField.text = model.password.value
 
       if let loginError = model.loginError {
         loginError.show(in: loginErrorLabel)

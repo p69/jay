@@ -1,11 +1,3 @@
-//
-//  Authorization.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 11/9/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 
 fileprivate let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
@@ -51,7 +43,7 @@ public enum Auth {
   }
 
   public static func createNew(email: String, firstName: String, lastName: String,
-                        pwd: String, avatar: String? = nil) -> Reader<AuthContext, Result<User, RegistrationError>> {
+                               pwd: String, retypePwd: String, avatar: String? = nil) -> Reader<AuthContext, Result<User, RegistrationError>> {
     return Reader { ctx in
       let newUser = User()
       newUser.email = email
@@ -60,14 +52,18 @@ public enum Auth {
       newUser.avatarUrlString = avatar
       //MARK - tuple for passing it through all the validation and saving functions
       //We need it to make composition with Kleisli(>=>) and Pipe(|>)
-      let newUserInput: (user:User, pwd: String) = (user: newUser, pwd: pwd)
+      let newUserInput: (user:User, pwd: String, retypePwd: String) = (user: newUser, pwd: pwd, retypePwd: retypePwd)
 
-      let validateEmailFunc = { (input:(user:User, pwd: String)) in
+      let validateEmailFunc = { (input:(user:User, pwd: String, retypePwd: String)) in
         validateEmail(input.user.email).map{_ in input}
       }
 
-      let validatePwdFunc = { (input:(user:User, pwd: String)) in
-        validatePwd(input.pwd).map{_ in input}
+      let validateRetypePwdFunc = { (input:(user:User, pwd: String, retypePwd: String)) in
+        validateRetypePwd(password: input.pwd, retype: input.retypePwd).map{_ in input}
+      }
+
+      let validatePwdFunc = { (input:(user:User, pwd: String, retypePwd: String)) in
+        validatePwd(input.pwd).map{_ in (user: input.user, pwd: input.pwd)}
       }
 
       let save = { (input:(user:User, pwd: String)) in
@@ -78,6 +74,7 @@ public enum Auth {
 
       return newUserInput
         |> validateEmailFunc
+        >=> validateRetypePwdFunc
         >=> validatePwdFunc
         >=> save
     }
@@ -86,6 +83,10 @@ public enum Auth {
   public static func validateEmail(_ email: String) -> Result<String, RegistrationError> {
     let emailIsValid = emailTest.evaluate(with: email)
     return emailIsValid ? .ok(email) : .error(.invalidEmail)
+  }
+
+  public static func validateRetypePwd(password: String, retype: String) -> Result<String, RegistrationError> {
+    return password == retype ? .ok(password) : .error(.retypePwdError)
   }
 
   public static func validatePwd(_ password: String) -> Result<String, RegistrationError> {
@@ -112,6 +113,6 @@ public enum LoginError: Equatable {
 public enum RegistrationError: Equatable {
   case invalidEmail
   case alreadyExists
-  case weakPassword(hint: String)
+  case retypePwdError, weakPassword(hint: String)
   case repositoryError(internal: UsersRepositoryError)
 }

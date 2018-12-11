@@ -24,7 +24,7 @@ extension SignIn {
     case .emailChanged(let value):
       let newModel = model.copyWith(
         email: .some(InputField.valid(value)),
-        loginError: OptionalArg<LoginError?>.some(nil))
+        loginError: nilArg())
       return (newModel, validateEmailCmd(email: value))
 
     case .invalidEmail:
@@ -34,13 +34,13 @@ extension SignIn {
     case .pwdChanged(let value):
       let newModel = model.copyWith(
         password: .some(InputField.valid(value)),
-        loginError: OptionalArg<LoginError?>.some(nil))
+        loginError: nilArg())
       return (newModel, [])
 
     case .signInTapped:
       let newModel = model.copyWith(
         inProgress: .some(true),
-        loginError: OptionalArg<LoginError?>.some(nil))
+        loginError: nilArg())
       return (newModel, loginCmd(email: model.email.value, pwd: model.password.value))
 
     case .loginFailed(let error):
