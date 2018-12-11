@@ -6,14 +6,14 @@ enum EditText {
     f.setLeftPaddingPoints(18.0)
     f.layer.cornerRadius = 2.0
     f.layer.backgroundColor = Colors.FormFileds.inputBackground.rawValue.cgColor
-    f.font = UIFont.systemFont(ofSize: 20.0, weight: .regular)
+    f.font = Fonts.subTitle
     f.textColor = UIColor.white
     f.attributedPlaceholder =  NSAttributedString(
       string: f.placeholder ?? "",
       attributes: [NSAttributedString.Key.foregroundColor: Colors.FormFileds.placeholderColor.rawValue])
     f.returnKeyType = .next
   }
-  
+
   static func secure(_ f:UITextField) {
     f.isSecureTextEntry = true
     f.returnKeyType = .done

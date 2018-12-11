@@ -1,11 +1,3 @@
-//
-//  Buttons.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 12/10/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 import UIKit
 
@@ -31,7 +23,7 @@ enum ButtonStyle {
     let text = btn.currentTitle ?? ""
     let commonAttributes : [NSAttributedString.Key: Any] = [
       NSAttributedString.Key.underlineStyle : true,
-      NSAttributedString.Key.font : UIFont.systemFont(ofSize: 18.0, weight: .regular)]
+      NSAttributedString.Key.font : Fonts.display1]
 
     let normalAttributes = commonAttributes.merging([NSAttributedString.Key.foregroundColor : Colors.Text.main.rawValue], uniquingKeysWith: {a, b in a})
 
