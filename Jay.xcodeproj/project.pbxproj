@@ -13,6 +13,9 @@
 		6D041DAA21BFEDD000AE8C03 /* SignUp+Model+Msg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D041DA921BFEDD000AE8C03 /* SignUp+Model+Msg.swift */; };
 		6D041DAC21BFF14900AE8C03 /* SignUp+Update+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D041DAB21BFF14900AE8C03 /* SignUp+Update+Init.swift */; };
 		6D041DAE21BFF23A00AE8C03 /* SignUp+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D041DAD21BFF23A00AE8C03 /* SignUp+View.swift */; };
+		6D041DB021C29F6700AE8C03 /* RealmStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D041DAF21C29F6700AE8C03 /* RealmStore.swift */; };
+		6D041DB221C2A30F00AE8C03 /* RealmExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D041DB121C2A30F00AE8C03 /* RealmExtensions.swift */; };
+		6D041DB421C2A39800AE8C03 /* Queues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D041DB321C2A39800AE8C03 /* Queues.swift */; };
 		6D4675852195E464000EC970 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4675842195E464000EC970 /* SignIn.swift */; };
 		6D4675872195E4FE000EC970 /* SignIn+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4675862195E4FE000EC970 /* SignIn+View.swift */; };
 		6D4675892195E8EE000EC970 /* SignIn+Update+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4675882195E8EE000EC970 /* SignIn+Update+Init.swift */; };
@@ -79,6 +82,9 @@
 		6D041DA921BFEDD000AE8C03 /* SignUp+Model+Msg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUp+Model+Msg.swift"; sourceTree = "<group>"; };
 		6D041DAB21BFF14900AE8C03 /* SignUp+Update+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUp+Update+Init.swift"; sourceTree = "<group>"; };
 		6D041DAD21BFF23A00AE8C03 /* SignUp+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignUp+View.swift"; sourceTree = "<group>"; };
+		6D041DAF21C29F6700AE8C03 /* RealmStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStore.swift; sourceTree = "<group>"; };
+		6D041DB121C2A30F00AE8C03 /* RealmExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExtensions.swift; sourceTree = "<group>"; };
+		6D041DB321C2A39800AE8C03 /* Queues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queues.swift; sourceTree = "<group>"; };
 		6D4675842195E464000EC970 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		6D4675862195E4FE000EC970 /* SignIn+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignIn+View.swift"; sourceTree = "<group>"; };
 		6D4675882195E8EE000EC970 /* SignIn+Update+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignIn+Update+Init.swift"; sourceTree = "<group>"; };
@@ -208,6 +214,7 @@
 			children = (
 				6D46758B21ABF3A9000EC970 /* SettingsStore */,
 				6D46759221AC3CDA000EC970 /* RealmUsersRepository.swift */,
+				6D041DAF21C29F6700AE8C03 /* RealmStore.swift */,
 			);
 			path = Persistance;
 			sourceTree = "<group>";
@@ -288,6 +295,8 @@
 				6DF6924721B9212F000CEF4C /* BaseViewController.swift */,
 				6DC34BCE21BE5CD200CC41C0 /* Form.swift */,
 				6DC34BD221BEA91600CC41C0 /* OptionalArg.swift */,
+				6D041DB121C2A30F00AE8C03 /* RealmExtensions.swift */,
+				6D041DB321C2A39800AE8C03 /* Queues.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -656,6 +665,7 @@
 				6DC34BCF21BE5CD200CC41C0 /* Form.swift in Sources */,
 				6D520DC82168F91C00E2DDC9 /* AppDelegate.swift in Sources */,
 				6D041DAE21BFF23A00AE8C03 /* SignUp+View.swift in Sources */,
+				6D041DB221C2A30F00AE8C03 /* RealmExtensions.swift in Sources */,
 				6DF6924D21B96DDF000CEF4C /* UIColor.swift in Sources */,
 				6DF6925721BA61E5000CEF4C /* UIButtons.swift in Sources */,
 				6DF6925221BA5B9D000CEF4C /* Assets.swift in Sources */,
@@ -666,7 +676,9 @@
 				6DF6925421BA5BBF000CEF4C /* Assets+Image.swift in Sources */,
 				6D4675872195E4FE000EC970 /* SignIn+View.swift in Sources */,
 				6D46758F21ABF73B000EC970 /* Storages.swift in Sources */,
+				6D041DB421C2A39800AE8C03 /* Queues.swift in Sources */,
 				6DF6924F21B99C18000CEF4C /* UITextField.swift in Sources */,
+				6D041DB021C29F6700AE8C03 /* RealmStore.swift in Sources */,
 				6DC34BD121BE6EA300CC41C0 /* UIButton.swift in Sources */,
 				6DC34BD321BEA91600CC41C0 /* OptionalArg.swift in Sources */,
 			);

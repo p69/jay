@@ -1,34 +1,16 @@
-//
-//  UsersRepository.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 11/26/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 import KeychainSwift
 import Jay_Domain
 import RealmSwift
 
-fileprivate let usersDbFileName = "users"
-fileprivate let defaultUsersRealmConfig: Realm.Configuration = {
-  var config = Realm.Configuration()
-  config.fileURL = config.fileURL!.deletingLastPathComponent().appendingPathComponent("\(usersDbFileName).realm")
-  config.objectTypes = [User.self]
-  return config
-}()
 
-class RealmUsersRepository: UsersRepository {
-
-  private let realmConfig: Realm.Configuration
+struct RealmUsersRepository: UsersRepository {
   private let keychain: KeychainSwift
+  private let realm: Realm
 
-  private lazy var realm = { try! Realm(configuration: realmConfig) }()
-
-  init(withConfig config: Realm.Configuration = defaultUsersRealmConfig,
-       withKeychain keychain: KeychainSwift = KeychainSwift()) {
-    self.realmConfig = config
+  init(with realm: Realm,
+       with keychain: KeychainSwift = KeychainSwift()) {
+    self.realm = realm
     self.keychain = keychain
   }
 
@@ -39,7 +21,7 @@ class RealmUsersRepository: UsersRepository {
   func add(newUser: User, password: String) -> Result<User, UsersRepositoryError> {
     return findBy(email: newUser.email)
       .inverse(onOk: {_ in .alreadyExist(message: "User \(newUser.email) already exist")}, onError: {_ in newUser})
-      .bind { [unowned self] user in self.addInternal(newUser: user, password: password) }
+      .bind { user in self.addInternal(newUser: user, password: password) }
   }
 
   private func addInternal(newUser: User, password: String) -> Result<User, UsersRepositoryError> {
@@ -56,7 +38,7 @@ class RealmUsersRepository: UsersRepository {
   }
 
   func findBy(email: String) -> Result<User, UsersRepositoryError> {
-    let user = realm.objects(User.self).first(where: {x in x.email == email})
+    let user = realm.objects(User.self).first(where: {x in x.email.lowercased() == email.lowercased()})
     return user != nil ? .ok(user!) : .error(.notFound(message: "Couldn't find user with email \(email)"))
   }
 
@@ -67,5 +49,3 @@ class RealmUsersRepository: UsersRepository {
     return .error(.notFound(message: "Couldn't find password for user \(email)"))
   }
 }
-
-

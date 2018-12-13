@@ -1,11 +1,3 @@
-//
-//  UsersRepository.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 11/29/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 import RealmSwift
 
@@ -16,7 +8,14 @@ public protocol UsersRepository {
   func verifyPwd(for email: String, pwd: String) -> Result<(), UsersRepositoryError>
 }
 
-public enum UsersRepositoryError: Error, Equatable {
+public enum UsersRepositoryError: Error {
+  case generic(message: String, cause: Error)
+  case alreadyExist(message: String)
+  case notFound(message: String)
+  case wrongPassword
+}
+
+extension UsersRepositoryError: Equatable {
   public static func == (lhs: UsersRepositoryError, rhs: UsersRepositoryError) -> Bool {
     switch (lhs, rhs) {
     case (.generic(let lMsg, let lCause), .generic(let rMsg, let rCause)):
@@ -31,10 +30,4 @@ public enum UsersRepositoryError: Error, Equatable {
       return false
     }
   }
-
-
-  case generic(message: String, cause: Error)
-  case alreadyExist(message: String)
-  case notFound(message: String)
-  case wrongPassword
 }

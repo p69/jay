@@ -1,6 +1,7 @@
 import Foundation
 import Swiftea
 import Jay_Domain
+import Dispatch
 
 extension SignUp {
   static func initModel(with previousModel: Model?)->(Model, Cmd<Msg>) {
@@ -96,7 +97,6 @@ extension SignUp {
   }
 
   struct Dependencies {
-    let authContext: AuthContext
     let router: AuthRouter
   }
 }
@@ -111,13 +111,20 @@ fileprivate func validateEmailCmd(email: String) -> Cmd<SignUp.Msg> {
 }
 
 fileprivate func createCmd(email: String, firstName: String, lastName: String, pwd: String, retypePwd: String) -> Cmd<SignUp.Msg> {
+
   return Cmd<SignUp.Msg>.of { dispatcher in
-    let result = Auth.createNew(email: email, firstName: firstName, lastName: lastName, pwd: pwd, retypePwd: retypePwd).run(SignIn.context)
-    switch result {
-    case .ok(let user):
-      dispatcher(SignUp.Msg.createSucceeded(user: user))
-    case .error(let error):
-      dispatcher(SignUp.Msg.createFailed(error: error))
+    RealmStore.Users.background { realm in
+      let createReader = Auth.createNew(email: email, firstName: firstName, lastName: lastName, pwd: pwd, retypePwd: retypePwd)
+      let result = createReader.run(AuthContext(repository: RealmUsersRepository(with: realm)))
+
+      switch result {
+      case .ok(let user):
+        user.toMain { (user:User) in
+          dispatcher(SignUp.Msg.createSucceeded(user: user))
+        }
+      case .error(let error):
+        dispatcher(SignUp.Msg.createFailed(error: error))
+      }
     }
   }
 }

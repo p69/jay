@@ -26,8 +26,6 @@ enum SignIn {
         update: { msg, model in SignIn.update(msg: msg, model: model, router: router) },
         view: view.update)
   }
-
-  static let context = AuthContext(repository: RealmUsersRepository())
 }
 
 extension SignIn.Model {

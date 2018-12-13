@@ -42,8 +42,9 @@ extension SignIn {
         loginError: .some(error))
       return (newModel, [])
 
-    case .loginSucceeded(_):
+    case .loginSucceeded(let user):
       //TODO: navigate
+      debugPrint("Logged in as: ", user)
       return (model.copyWith(inProgress: .some(false)), [])
 
     case .signUpTapped:
@@ -73,12 +74,20 @@ fileprivate func validateEmailCmd(email: String) -> Cmd<SignIn.Msg> {
 
 fileprivate func loginCmd(email: String, pwd: String) -> Cmd<SignIn.Msg> {
   return Cmd<SignIn.Msg>.of { dispatcher in
-    let result = Auth.tryLogin(email: email, pwd: pwd).run(SignIn.context)
-    switch result {
-    case .ok(let user):
-      dispatcher(SignIn.Msg.loginSucceeded(user: user))
-    case .error(let error):
-      dispatcher(SignIn.Msg.loginFailed(error: error))
+    RealmStore.Users.background { realm in
+      let loginReader = Auth.tryLogin(email: email, pwd: pwd)
+      let context = AuthContext(repository: RealmUsersRepository(with: realm))
+      let result = loginReader.run(context)
+
+      switch result {
+      case .ok(let user):
+        user.toMain { (user: User) in
+          dispatcher(SignIn.Msg.loginSucceeded(user: user))
+        }
+      case .error(let error):
+        dispatcher(SignIn.Msg.loginFailed(error: error))
+      }
     }
+
   }
 }

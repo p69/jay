@@ -1,26 +1,12 @@
-//
-//  User.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 11/9/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 import RealmSwift
 
+@objcMembers
 public class User: Object {
-  @objc dynamic
-  public var firstName: String = ""
-
-  @objc dynamic
-  public var lastName: String = ""
-
-  @objc dynamic
-  public var email: String = ""
-
-  @objc dynamic
-  public var avatarUrlString: String? = nil
+  public dynamic var firstName: String = ""
+  public dynamic var lastName: String = ""
+  public dynamic var email: String = ""
+  public dynamic var avatarUrlString: String? = nil
 
   public override static func primaryKey() -> String? {
     return "email"

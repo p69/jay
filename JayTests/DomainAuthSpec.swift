@@ -20,7 +20,7 @@ class DomainAuthSpec: QuickSpec {
 
   var context: AuthContext {
     return AuthContext(repository:
-      RealmUsersRepository(withConfig: realmConfig, withKeychain: KeychainSwift(keyPrefix: "test_")))
+      RealmUsersRepository(with: realm, with: KeychainSwift(keyPrefix: "test_")))
   }
 
   override func spec() {
