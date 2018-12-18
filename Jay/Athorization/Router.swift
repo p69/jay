@@ -23,6 +23,6 @@ struct DefaultAuthRouter: AuthRouter {
   }
 
   func goToHome() {
-    //TODO
+    navigationController.showDetailViewController(HomeNavigationController(), sender: nil)
   }
 }

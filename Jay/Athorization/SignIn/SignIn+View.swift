@@ -16,6 +16,8 @@ extension SignIn {
     typealias TModel = Model
     typealias TMsg = Msg
 
+    let scrollView = UIScrollView()
+    let contentView = UIView()
     let signInBtn = ButtonWithIcon()
     let emailField = UITextField()
     let pwdField = UITextField()
@@ -68,25 +70,31 @@ extension SignIn {
       let bottomItemsStack = [dontHaveAccountLabel, signUpBtn].wrapInHorizontalStack()
 
       sv(
-
-        signInDescription,
-        emailField,
-        pwdField,
-        forgotPwdLabel,
-        signInBtn,
-        bottomItemsStack,
-        emailValidationLabel,
-        loginErrorLabel
+        scrollView.sv(
+          contentView.sv(
+          signInDescription,
+          emailField,
+          pwdField,
+          forgotPwdLabel,
+          signInBtn,
+          bottomItemsStack,
+          emailValidationLabel,
+          loginErrorLabel
+            )
+        )
       )
+      scrollView.fillContainer()
+      contentView.fillContainer()
+      contentView.Width == scrollView.Width
 
       // Vertical + Horizontal Layout
-      layout(
+      contentView.layout(
         160,
         signInDescription.centerHorizontally(),
         50,
         |-20-emailField-20-| ~ 50,
         10,
-        |-20-emailValidationLabel-| ~ 10,
+        |-20-emailValidationLabel-20-| ~ 10,
         40,
         |-20-pwdField-20-| ~ 50,
         8,
@@ -98,7 +106,8 @@ extension SignIn {
         50,
         bottomItemsStack.centerHorizontally()
       )
-      signUpBtn.Left >= dontHaveAccountLabel.Right + 20.0
+      signUpBtn.Left >= dontHaveAccountLabel.Right + 20
+      bottomItemsStack.Bottom == contentView.Bottom
 
       // Content
       emailField.placeholder = Placeholders.email.rawValue

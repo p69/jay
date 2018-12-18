@@ -19,11 +19,11 @@ enum SignIn {
     case loginFailed(error: LoginError), loginSucceeded(user: User)
   }
   
-  static func mkProgramWith<TView: SwifteaView>(view: TView, model: Model?, router: AuthRouter)->Program<Model, Msg, ()>
+  static func mkProgramWith<TView: SwifteaView>(view: TView, model: Model?, dependencies: Dependencies)->Program<Model, Msg, ()>
     where TView.TModel == Model, TView.TMsg == Msg {
       return Program.mkSimple(
         initModel: { SignIn.initModel(with: model) },
-        update: { msg, model in SignIn.update(msg: msg, model: model, router: router) },
+        update: { msg, model in SignIn.update(msg: msg, model: model, dependencies: dependencies) },
         view: view.update)
   }
 }

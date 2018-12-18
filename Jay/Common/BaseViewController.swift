@@ -1,11 +1,3 @@
-//
-//  BaseViewController.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 12/6/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 import UIKit
 import Swiftea
@@ -22,7 +14,7 @@ class BaseViewController<TView: SwifteaView, TModel: Equatable, TMsg> : UIViewCo
 
   var swifteaView: TView!
   lazy var swifteaProgram = self.createProgram(self.swifteaView, nil)
-  var gradientLayer: CAGradientLayer!
+  var bgView: GradientView!
 
   required convenience init(createView: @escaping CreateView, createProgram: @escaping CreateProgram) {
     self.init(nibName: nil, bundle: nil)
@@ -31,17 +23,18 @@ class BaseViewController<TView: SwifteaView, TModel: Equatable, TMsg> : UIViewCo
   }
 
   func setBackgrounGradient() {
-    gradientLayer = CAGradientLayer()
-
-    gradientLayer.frame = UIScreen.main.bounds
-
-    gradientLayer.colors = [
+    bgView = GradientView()
+    bgView.colors = [
       Colors.backgroundGradientStart.rawValue.cgColor,
       Colors.backgroundGradientEnd.rawValue.cgColor
     ]
-    gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
-    gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-    swifteaView.layer.insertSublayer(gradientLayer, at: 0)
+    bgView.start = CGPoint(x: 0.0, y: 0.0)
+    bgView.end = CGPoint(x: 1.0, y: 1.0)
+    bgView.contentMode = .redraw
+
+    swifteaView.insertSubview(bgView, at: 0)
+    bgView.translatesAutoresizingMaskIntoConstraints = false
+    bgView.fillContainer()
   }
 
   override func loadView() {

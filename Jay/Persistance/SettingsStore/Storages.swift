@@ -1,11 +1,3 @@
-//
-//  Storages.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 11/26/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 import KeychainSwift
 
@@ -54,7 +46,6 @@ struct KeychainStorable<T>: ExpressibleByStringLiteral, StringLiteralBoilerplate
     self.key = value
   }
 
-  //Only String, Bool and Data are supported
   var value: T? {
     get {
       guard let item = store.get(key) as? T else {

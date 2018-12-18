@@ -17,6 +17,8 @@ extension SignUp {
     typealias TModel = Model
     typealias TMsg = Msg
 
+    let scrollView = UIScrollView()
+    let contentView = UIView()
     let createBtn = SimpleHighlightedButton()
     let emailField = UITextField()
     let firstNameField = UITextField()
@@ -83,19 +85,27 @@ extension SignUp {
 
     func layout() {
       sv(
-        signInDescription,
-        emailField,
-        firstNameField,
-        lastNameField,
-        pwdField,
-        retypePwdField,
-        emailValidationLabel,
-        pwdValidationLabel,
-        errorLabel,
-        createBtn
+        scrollView.sv(
+          contentView.sv(
+            signInDescription,
+            emailField,
+            firstNameField,
+            lastNameField,
+            pwdField,
+            retypePwdField,
+            emailValidationLabel,
+            pwdValidationLabel,
+            errorLabel,
+            createBtn
+          )
+        )
       )
 
-      layout(
+      scrollView.fillContainer()
+      contentView.fillContainer()
+      contentView.Width == scrollView.Width
+
+      contentView.layout(
         160,
         signInDescription.centerHorizontally(),
         50,
@@ -115,6 +125,7 @@ extension SignUp {
         40,
         createBtn.centerHorizontally().width(>=200) ~ 50
       )
+      createBtn.Bottom == contentView.Bottom
 
 
       // Content

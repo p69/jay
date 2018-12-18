@@ -5,7 +5,8 @@ import Jay_Domain
 class SignUpViewController: BaseViewController<SignUp.View, SignUp.Model, SignUp.Msg> {
   convenience init(router: AuthRouter) {
     let dependencies = SignUp.Dependencies(
-      router: router)
+      router: router,
+      settings: AppSettings.shared)
     let mkProgram = { (view:SignUp.View, model: SignUp.Model?) in
       SignUp.mkProgramWith(view: view, model: model, dependencies: dependencies)
     }

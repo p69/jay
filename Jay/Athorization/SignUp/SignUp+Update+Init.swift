@@ -1,7 +1,6 @@
 import Foundation
 import Swiftea
 import Jay_Domain
-import Dispatch
 
 extension SignUp {
   static func initModel(with previousModel: Model?)->(Model, Cmd<Msg>) {
@@ -69,11 +68,14 @@ extension SignUp {
       return (newModel, [])
       
     case .createSucceeded(let user):
-      //TODO: navigate to home
       let newModel = model.copyWith(
         inProgress: .some(false),
         registrationError: nilArg())
-      return (newModel, [])
+      var appSettings = dependencies.settings
+      return (newModel, Cmd<Msg>.of {_ in
+        appSettings.currentUserEmail.value = user.email
+        dependencies.router.goToHome()
+      })
     }
   }
 
@@ -98,6 +100,7 @@ extension SignUp {
 
   struct Dependencies {
     let router: AuthRouter
+    let settings: AppSettings
   }
 }
 

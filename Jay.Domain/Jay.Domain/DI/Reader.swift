@@ -1,11 +1,3 @@
-//
-//  Reader.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 11/27/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import Foundation
 
 //MARK - simple Reader Monad for managing dependencies
@@ -29,5 +21,9 @@ public struct Reader<E, A> {
 
   public func flatMap<B>(_ f: @escaping (A) -> Reader<E, B>) -> Reader<E, B> {
     return Reader<E, B>{ e in f(self.reader(e)).reader(e) }
+  }
+
+  public func andThen<B>(_ r: Reader<A, B>) -> Reader<E, B> {
+    return Reader<E, B> { e in r.reader(self.reader(e)) }
   }
 }

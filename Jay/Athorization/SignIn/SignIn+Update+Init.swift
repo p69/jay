@@ -1,6 +1,7 @@
 import Foundation
 import Swiftea
 import Jay_Domain
+import RealmSwift
 
 extension SignIn {
   static func initModel(with previousModel: Model?)->(Model, Cmd<Msg>) {
@@ -10,7 +11,7 @@ extension SignIn {
     return (Model(email: InputFieldModel.valid(""), password: InputFieldModel.valid(""), inProgress: false, loginError: nil), [])
   }
 
-  static func update(msg: Msg, model: Model, router: AuthRouter) -> (Model, Cmd<Msg>) {
+  static func update(msg: Msg, model: Model, dependencies: Dependencies) -> (Model, Cmd<Msg>) {
     switch msg {
 
     case .emailChanged(let value):
@@ -43,13 +44,15 @@ extension SignIn {
       return (newModel, [])
 
     case .loginSucceeded(let user):
-      //TODO: navigate
       debugPrint("Logged in as: ", user)
-      return (model.copyWith(inProgress: .some(false)), [])
+      var settings = dependencies.settings
+      return (model.copyWith(inProgress: .some(false)), Cmd<SignIn.Msg>.of { _ in
+        settings.currentUserEmail.value = user.email
+        dependencies.router.goToHome()
+      })
 
     case .signUpTapped:
-      //TODO: navigate
-      return (model, Cmd<SignIn.Msg>.of { _ in router.goToSignUp() })
+      return (model, Cmd<SignIn.Msg>.of { _ in dependencies.router.goToSignUp() })
     }
   }
 
@@ -60,6 +63,11 @@ extension SignIn {
     default:
       return .none
     }
+  }
+
+  struct Dependencies {
+    let router: AuthRouter
+    let settings: AppSettings
   }
 }
 
