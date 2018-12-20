@@ -16,6 +16,6 @@ class SignUpViewController: BaseViewController<SignUp.View, SignUp.Model, SignUp
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    self.title = "Sign Up"
+    self.title = AuthStrings.SignUp.viewControllerTitle.localized
   }
 }

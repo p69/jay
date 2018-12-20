@@ -5,14 +5,6 @@ import Swiftea
 import Jay_Domain
 
 extension SignUp {
-  fileprivate enum Placeholders: String {
-    case email = "example@example.com"
-    case password = "Password"
-    case repeatPassword = "Retype password"
-    case firstName = "First name"
-    case lastName = "Last name"
-  }
-
   final class View: UIView, SwifteaView {
     typealias TModel = Model
     typealias TMsg = Msg
@@ -129,13 +121,13 @@ extension SignUp {
 
 
       // Content
-      emailField.placeholder = Placeholders.email.rawValue
-      pwdField.placeholder = Placeholders.password.rawValue
-      firstNameField.placeholder = Placeholders.firstName.rawValue
-      lastNameField.placeholder = Placeholders.lastName.rawValue
-      retypePwdField.placeholder = Placeholders.repeatPassword.rawValue
-      createBtn.setTitle("Create", for: .normal)
-      signInDescription.text = "Create new account."
+      emailField.placeholder = AuthStrings.emailPlaceholder.localized
+      pwdField.placeholder = AuthStrings.SignUp.passwordPlaceholder.localized
+      firstNameField.placeholder = AuthStrings.SignUp.firstnamePlaceholder.localized
+      lastNameField.placeholder = AuthStrings.SignUp.lastnamePlaceholder.localized
+      retypePwdField.placeholder = AuthStrings.SignUp.retypePasswordPlaceholder.localized
+      createBtn.setTitle(AuthStrings.SignUp.createButton.localized, for: .normal)
+      signInDescription.text = AuthStrings.SignUp.heaederLabel.localized
 
       // Styling
       signInDescription.style(TextStyle.description)
@@ -156,15 +148,15 @@ extension RegistrationError {
   func show(in label:UILabel) {
     switch self {
     case .alreadyExists:
-      label.text = "This email is already in use"
+      label.text = AuthStrings.SignUp.emailAlreadyUsed.localized
     case .invalidEmail:
-      label.text = "Email is invalid"
-    case .weakPassword(let hint):
-      label.text = hint
+      label.text = AuthStrings.emailValidationError.localized
+    case .weakPassword(_):
+      label.text = AuthStrings.SignUp.passwordErrorHint.localized
     case .retypePwdError:
-      label.text = "Passwords don't match"
+      label.text = AuthStrings.SignUp.passwordsDontMatchError.localized
     case .repositoryError(_):
-      label.text = "Something bad has happened. Please try again"
+      label.text = AuthStrings.SignUp.genericError.localized
     }
   }
 }

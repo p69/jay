@@ -1,0 +1,28 @@
+"email placeholder" = "example@example.com";
+"email validation error" = "Email must be valid";
+
+//Sign In
+"signin: screen title" = "Sign In";
+"signin: signin button" = "Sign In";
+"signin: header" = "Sign In to your account.";
+"signin: forgot password" = "Forgot passwrd?";
+"signin: don't have account" = "Don't have an account yet?";
+"signin: signup button" = "Sign Up";
+"signin: password placeholder" = "your password";
+"signin: wrong password error" = "Incorrect password for %@";
+"signin: user %@ not found error" = "User %@ not found";
+"signin: generic error" = "Error occurred";
+
+//Sign Up
+"signup: screen title" = "Sign Up";
+"signup: create button" = "Create";
+"signup: header" = "Create new account.";
+"signup: password placeholder" = "Password";
+"signup: retype password placeholder" = "Retype password";
+"signup: firstname placeholder" = "First name";
+"signup: lastname placeholder" = "Last name";
+"signup: email is in use error" = "This email is already in use";
+"signup: email is invalid error" = "Email is invalid";
+"signup: passwords don't match error" = "Passwords don't match";
+"signup: generic error" = "Something bad has happened. Please try again";
+"signup: password error hint" = "Length 8. At least one alphabet and one special character";

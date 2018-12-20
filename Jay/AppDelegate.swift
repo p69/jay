@@ -1,11 +1,3 @@
-//
-//  AppDelegate.swift
-//  Jay
-//
-//  Created by Pavel Shyliahau on 10/6/18.
-//  Copyright © 2018 Pavel Shyliahau. All rights reserved.
-//
-
 import UIKit
 import Swiftea
 import RealmSwift

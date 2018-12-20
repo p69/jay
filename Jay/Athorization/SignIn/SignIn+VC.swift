@@ -12,6 +12,6 @@ class SignInViewController: BaseViewController<SignIn.View, SignIn.Model, SignIn
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    self.title = "Sign In"
+    self.title = AuthStrings.SignIn.viewControllerTitle.localized
   }
 }

@@ -6,12 +6,6 @@ import ActionKit
 import Jay_Domain
 
 extension SignIn {
-
-  fileprivate enum Placeholders: String {
-    case email = "example@example.com"
-    case password = "your password"
-  }
-
   final class View: UIView, SwifteaView {
     typealias TModel = Model
     typealias TMsg = Msg
@@ -110,13 +104,13 @@ extension SignIn {
       bottomItemsStack.Bottom == contentView.Bottom
 
       // Content
-      emailField.placeholder = Placeholders.email.rawValue
-      pwdField.placeholder = Placeholders.password.rawValue
-      signInBtn.setTitle("Sign In", for: .normal)
-      signInDescription.text = "Sign In to your account."
-      forgotPwdLabel.text = "Forgot passwrd?"
-      dontHaveAccountLabel.text = "Don't have an account yet?"
-      signUpBtn.setTitle("Sign Up", for: .normal)
+      emailField.placeholder = AuthStrings.emailPlaceholder.localized
+      pwdField.placeholder = AuthStrings.SignIn.passwordPlaceholder.localized
+      signInBtn.setTitle(AuthStrings.SignIn.signInButton.localized, for: .normal)
+      signInDescription.text = AuthStrings.SignIn.headerLabel.localized
+      forgotPwdLabel.text = AuthStrings.SignIn.forgotPasswordLabel.localized
+      dontHaveAccountLabel.text = AuthStrings.SignIn.dontHaveAccountLabel.localized
+      signUpBtn.setTitle(AuthStrings.SignIn.signUpButton.localized, for: .normal)
 
       // Styling
       signInDescription.style(TextStyle.description)
@@ -137,11 +131,11 @@ extension LoginError {
   func show(in label:UILabel) {
     switch self {
     case .wrongPassword(let email):
-      label.text = "Incorrect password for \(email)"
+      label.text = AuthStrings.SignIn.wrongPasswordError.localized(email)
     case .notFound(let email):
-      label.text = "User \(email) not found"
+      label.text = AuthStrings.SignIn.userNotFoundError.localized(email)
     case .generic(_):
-      label.text = "Error occured"
+      label.text = AuthStrings.SignIn.genericError.localized
     }
   }
 }

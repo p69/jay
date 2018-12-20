@@ -21,7 +21,9 @@ extension SignIn {
       return (newModel, value.isEmpty ? [] : validateEmailCmd(email: value))
 
     case .invalidEmail:
-      let newModel = model.copyWith(email: .some(InputFieldModel.invalid(value: model.email.value, error: "Email must be valid")))
+      let newModel = model.copyWith(email:
+        .some(InputFieldModel.invalid(value: model.email.value,
+                                      error: AuthStrings.emailValidationError.localized)))
       return (newModel, [])
 
     case .pwdChanged(let value):

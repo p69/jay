@@ -35,6 +35,9 @@
 		6D89237721C408990000F9E5 /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89237621C408990000F9E5 /* MenuViewController.swift */; };
 		6D89237921C408DF0000F9E5 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89237821C408DF0000F9E5 /* RootViewController.swift */; };
 		6D89237B21C948500000F9E5 /* GradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89237A21C948500000F9E5 /* GradientView.swift */; };
+		6D89237F21CAA0940000F9E5 /* Authorization.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6D89238121CAA0940000F9E5 /* Authorization.strings */; };
+		6D89238B21CAEE030000F9E5 /* Localizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89238A21CAEE030000F9E5 /* Localizable.swift */; };
+		6D89238D21CAEE930000F9E5 /* AuthLocalization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D89238C21CAEE930000F9E5 /* AuthLocalization.swift */; };
 		6DC34BCF21BE5CD200CC41C0 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC34BCE21BE5CD200CC41C0 /* Form.swift */; };
 		6DC34BD121BE6EA300CC41C0 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC34BD021BE6EA300CC41C0 /* UIButton.swift */; };
 		6DC34BD321BEA91600CC41C0 /* OptionalArg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC34BD221BEA91600CC41C0 /* OptionalArg.swift */; };
@@ -117,6 +120,10 @@
 		6D89237621C408990000F9E5 /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		6D89237821C408DF0000F9E5 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		6D89237A21C948500000F9E5 /* GradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientView.swift; sourceTree = "<group>"; };
+		6D89238021CAA0940000F9E5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Authorization.strings; sourceTree = "<group>"; };
+		6D89238921CAA7D60000F9E5 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Authorization.strings; sourceTree = "<group>"; };
+		6D89238A21CAEE030000F9E5 /* Localizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localizable.swift; sourceTree = "<group>"; };
+		6D89238C21CAEE930000F9E5 /* AuthLocalization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthLocalization.swift; sourceTree = "<group>"; };
 		6DC34BCE21BE5CD200CC41C0 /* Form.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		6DC34BD021BE6EA300CC41C0 /* UIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
 		6DC34BD221BEA91600CC41C0 /* OptionalArg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionalArg.swift; sourceTree = "<group>"; };
@@ -272,6 +279,7 @@
 				6D87FDB8217620E9000109C4 /* Common */,
 				6DF6925521BA61B7000CEF4C /* UIControls */,
 				6DC34BD421BEF85F00CC41C0 /* Styles */,
+				6D89237C21CA93CC0000F9E5 /* Localization */,
 				6D46758A21ABF39A000EC970 /* Persistance */,
 				6DF6924B21B96DCA000CEF4C /* Utils */,
 				6DF6925021BA5B84000CEF4C /* Assets */,
@@ -332,6 +340,16 @@
 				6D89237821C408DF0000F9E5 /* RootViewController.swift */,
 			);
 			path = Menu;
+			sourceTree = "<group>";
+		};
+		6D89237C21CA93CC0000F9E5 /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				6D89238121CAA0940000F9E5 /* Authorization.strings */,
+				6D89238A21CAEE030000F9E5 /* Localizable.swift */,
+				6D89238C21CAEE930000F9E5 /* AuthLocalization.swift */,
+			);
+			path = Localization;
 			sourceTree = "<group>";
 		};
 		6DC34BD421BEF85F00CC41C0 /* Styles */ = {
@@ -494,6 +512,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 6D520DBB2168F91C00E2DDC9;
 			productRefGroup = 6D520DC52168F91C00E2DDC9 /* Products */;
@@ -514,6 +533,7 @@
 			files = (
 				6D520DD22168F91D00E2DDC9 /* LaunchScreen.storyboard in Resources */,
 				6D520DCF2168F91D00E2DDC9 /* Assets.xcassets in Resources */,
+				6D89237F21CAA0940000F9E5 /* Authorization.strings in Resources */,
 				6D520DCD2168F91C00E2DDC9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -688,6 +708,7 @@
 				6D4675892195E8EE000EC970 /* SignIn+Update+Init.swift in Sources */,
 				6D87FDBA21762126000109C4 /* SwifteaView.swift in Sources */,
 				6DC34BE721BFB09C00CC41C0 /* Router.swift in Sources */,
+				6D89238D21CAEE930000F9E5 /* AuthLocalization.swift in Sources */,
 				6D46758D21ABF3C8000EC970 /* StoredObject.swift in Sources */,
 				6DC34BDA21BEFC7E00CC41C0 /* EditText.swift in Sources */,
 				6D4675852195E464000EC970 /* SignIn.swift in Sources */,
@@ -704,6 +725,7 @@
 				6D349C8F21C3AADD00679141 /* AppSettings.swift in Sources */,
 				6D041DAE21BFF23A00AE8C03 /* SignUp+View.swift in Sources */,
 				6D041DB221C2A30F00AE8C03 /* RealmExtensions.swift in Sources */,
+				6D89238B21CAEE030000F9E5 /* Localizable.swift in Sources */,
 				6DF6924D21B96DDF000CEF4C /* UIColor.swift in Sources */,
 				6D89237B21C948500000F9E5 /* GradientView.swift in Sources */,
 				6DF6925721BA61E5000CEF4C /* UIButtons.swift in Sources */,
@@ -773,6 +795,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		6D89238121CAA0940000F9E5 /* Authorization.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6D89238021CAA0940000F9E5 /* en */,
+				6D89238921CAA7D60000F9E5 /* ru */,
+			);
+			name = Authorization.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -780,6 +811,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -841,6 +873,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

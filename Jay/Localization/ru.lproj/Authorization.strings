@@ -1,0 +1,28 @@
+"email placeholder" = "example@example.com";
+"email validation error" = "Введите правильный Email";
+
+//Sign In
+"signin: screen title"  = "Вход";
+"signin: signin button" = "Войти";
+"signin: header" = "Войдите в ваш аккаунт.";
+"signin: forgot password" = "Забыли пароль?";
+"signin: don't have account" = "Нет аккаунта?";
+"signin: signup button" = "Зарегистрироваться";
+"signin: password placeholder" = "Ваш пароль";
+"signin: wrong password error" = "Неверный пароль для %@";
+"signin: user %@ not found error" = "Пользователь %@ не найден";
+"signin: generic error" = "Произошла ошибка";
+
+//Sign Up
+"signup: screen title" = "Регистрация";
+"signup: create button" = "Создать";
+"signup: header" = "Создайте новый аккаунт.";
+"signup: password placeholder" = "Пароль";
+"signup: retype password placeholder" = "Повторите пароль";
+"signup: firstname placeholder" = "Имя";
+"signup: lastname placeholder" = "Фамилия";
+"signup: email is in use error" = "Этот email занят другим пользователем";
+"signup: email invalid error" = "Неправильный email";
+"signup: passwords don't match error" = "Пароли не совпадают";
+"signup: generic error" = "Что-то плохое случилось. Пожалуйста, попробуйте снова.";
+"signup: password error hint" = "Длина 8. Хотя бы один символ алфавита и один специальный символ.";

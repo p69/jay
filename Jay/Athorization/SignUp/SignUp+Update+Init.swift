@@ -27,7 +27,7 @@ extension SignUp {
       return (newModel, value.isEmpty ? [] : validateEmailCmd(email: value))
 
     case .invalidEmail:
-      let newModel = model.copyWith(email: .some(model.email.setError(with: "Email must be valid")))
+      let newModel = model.copyWith(email: .some(model.email.setError(with: AuthStrings.emailValidationError.localized)))
       return (newModel, [])
 
     case .firstNameChanged(let value):
@@ -82,7 +82,7 @@ extension SignUp {
   private static func updateFieldsState(model: Model, error: RegistrationError) -> Model {
     switch error {
     case .invalidEmail:
-      let email = model.email.setError(with: "Email must be valid")
+      let email = model.email.setError(with: AuthStrings.emailValidationError.localized)
       return model.copyWith(email: .some(email))
     case .weakPassword(_):
       let password = model.password.setError()
