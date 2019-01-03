@@ -1,6 +1,5 @@
 import Foundation
 import UIKit
-import Swiftea
 
 class SignInViewController: BaseViewController<SignIn.View, SignIn.Model, SignIn.Msg> {
   convenience init(router: AuthRouter) {

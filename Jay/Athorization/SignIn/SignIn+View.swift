@@ -1,6 +1,5 @@
 import Foundation
 import UIKit
-import Swiftea
 import Stevia
 import ActionKit
 import Jay_Domain

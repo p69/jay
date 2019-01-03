@@ -5,9 +5,6 @@
       location = "group:Jay.Domain/Jay.Domain.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:../Swiftea/Swiftea.xcodeproj">
-   </FileRef>
-   <FileRef
       location = "group:Jay.xcodeproj">
    </FileRef>
    <FileRef

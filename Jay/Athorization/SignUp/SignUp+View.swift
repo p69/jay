@@ -1,7 +1,6 @@
 import Foundation
 import UIKit
 import Stevia
-import Swiftea
 import Jay_Domain
 
 extension SignUp {

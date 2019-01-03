@@ -16,6 +16,8 @@
 		6D041DB021C29F6700AE8C03 /* RealmStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D041DAF21C29F6700AE8C03 /* RealmStore.swift */; };
 		6D041DB221C2A30F00AE8C03 /* RealmExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D041DB121C2A30F00AE8C03 /* RealmExtensions.swift */; };
 		6D041DB421C2A39800AE8C03 /* Queues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D041DB321C2A39800AE8C03 /* Queues.swift */; };
+		6D30590E21DE0A1200A593A9 /* Swiftea.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D30590D21DE0A1200A593A9 /* Swiftea.swift */; };
+		6D30591021DE0A7E00A593A9 /* Cmd.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D30590F21DE0A7E00A593A9 /* Cmd.swift */; };
 		6D349C8F21C3AADD00679141 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D349C8E21C3AADC00679141 /* AppSettings.swift */; };
 		6D4675852195E464000EC970 /* SignIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4675842195E464000EC970 /* SignIn.swift */; };
 		6D4675872195E4FE000EC970 /* SignIn+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D4675862195E4FE000EC970 /* SignIn+View.swift */; };
@@ -94,6 +96,8 @@
 		6D041DAF21C29F6700AE8C03 /* RealmStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmStore.swift; sourceTree = "<group>"; };
 		6D041DB121C2A30F00AE8C03 /* RealmExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExtensions.swift; sourceTree = "<group>"; };
 		6D041DB321C2A39800AE8C03 /* Queues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Queues.swift; sourceTree = "<group>"; };
+		6D30590D21DE0A1200A593A9 /* Swiftea.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Swiftea.swift; sourceTree = "<group>"; };
+		6D30590F21DE0A7E00A593A9 /* Cmd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cmd.swift; sourceTree = "<group>"; };
 		6D349C8E21C3AADC00679141 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		6D4675842195E464000EC970 /* SignIn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignIn.swift; sourceTree = "<group>"; };
 		6D4675862195E4FE000EC970 /* SignIn+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignIn+View.swift"; sourceTree = "<group>"; };
@@ -206,6 +210,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		6D30590C21DE09F300A593A9 /* Swiftea */ = {
+			isa = PBXGroup;
+			children = (
+				6D30590D21DE0A1200A593A9 /* Swiftea.swift */,
+				6D30590F21DE0A7E00A593A9 /* Cmd.swift */,
+			);
+			path = Swiftea;
+			sourceTree = "<group>";
+		};
 		6D4675822195E435000EC970 /* Athorization */ = {
 			isa = PBXGroup;
 			children = (
@@ -273,6 +286,7 @@
 		6D520DC62168F91C00E2DDC9 /* Jay */ = {
 			isa = PBXGroup;
 			children = (
+				6D30590C21DE09F300A593A9 /* Swiftea */,
 				6D4675822195E435000EC970 /* Athorization */,
 				6D89237021C3BFC20000F9E5 /* Home */,
 				6D89237321C4084C0000F9E5 /* Menu */,
@@ -707,6 +721,7 @@
 				6D89237921C408DF0000F9E5 /* RootViewController.swift in Sources */,
 				6D4675892195E8EE000EC970 /* SignIn+Update+Init.swift in Sources */,
 				6D87FDBA21762126000109C4 /* SwifteaView.swift in Sources */,
+				6D30591021DE0A7E00A593A9 /* Cmd.swift in Sources */,
 				6DC34BE721BFB09C00CC41C0 /* Router.swift in Sources */,
 				6D89238D21CAEE930000F9E5 /* AuthLocalization.swift in Sources */,
 				6D46758D21ABF3C8000EC970 /* StoredObject.swift in Sources */,
@@ -723,6 +738,7 @@
 				6DC34BCF21BE5CD200CC41C0 /* Form.swift in Sources */,
 				6D520DC82168F91C00E2DDC9 /* AppDelegate.swift in Sources */,
 				6D349C8F21C3AADD00679141 /* AppSettings.swift in Sources */,
+				6D30590E21DE0A1200A593A9 /* Swiftea.swift in Sources */,
 				6D041DAE21BFF23A00AE8C03 /* SignUp+View.swift in Sources */,
 				6D041DB221C2A30F00AE8C03 /* RealmExtensions.swift in Sources */,
 				6D89238B21CAEE030000F9E5 /* Localizable.swift in Sources */,
